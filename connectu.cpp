@@ -51,9 +51,14 @@ public:
     // Task: Add a new post to the FRONT of the list (O(1))
     void addPost(int pid, int uid, string content, int likes, long time) {
         // TODO: LAB 1
+    // Create a new Post node on the heap
+        Post* newPost = new Post(pid, uid, content, likes, time);
 
+    // Insert at the FRONT (O(1)) so newest appears first
+        newPost->next = head;
+        head = newPost;
+}
 
-    }
 
     void printTimeline() {
         Post* current = head;
@@ -61,9 +66,19 @@ public:
         
         // Task: Traverse the linked list and print content
         // TODO: LAB 1
+            while (current != nullptr) {
+            cout << "  > [ID: " << current->postId << "] "
+                 << current->content
+                 << " (" << current->likes << " likes)" << endl;
 
+            current = current->next;
+        }
     }
 };
+
+        
+             
+             
 
 // Forward Declaration
 class User;
@@ -461,7 +476,7 @@ void showMainMenu() {
         else if (choice == 3) {
             // SAFETY: Commented out to prevent data loss on initial run.
             // Students must uncomment this ONLY when Lab 1 is complete.
-            // saveData(); 
+            saveData(); 
             cout << "Goodbye! " << endl;
         }
     }
